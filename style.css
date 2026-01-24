@@ -39,6 +39,7 @@ body {
       padding: 2rem;
       max-width: 700px;
       margin: auto;
+      line-height: 1.6;
     }
 
     h1 {
@@ -67,3 +68,4 @@ body {
     small {
       color: #94a3b8;
     }
+    

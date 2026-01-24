@@ -38,6 +38,23 @@
 </main>
 
 <script src="script.js"></script>
-
+  <h1>How it Works</h1>
+  <p>PassTester will test your password for multiple common attacks and vulnerabilities.
+  This includes brute-force, data breaches (includes dictionary), and pattern recognition.
+  
+  <br>Let's start with brute-force! We assume the worst-case scenario, as if the hacker already
+  knows the number and types of characters. This allows you to make your password almost
+  untouchable by a brute-force attack. In other words, if your password is secure in the worst-case
+  scenario, then it is much more safe in a real-life scenario.
+  <br>Here's the math behind the brute-force time estimation. We will use abc123 as an example:
+    <ol>
+      <li>abc123 has 6 characters. The types of characters include lowercase letters and numbers.</li>
+      <li>Since there are 26 lowercase letters and 10 numbers, the total possibilities for each
+      character is 26 + 10 = <em>36</em></li>
+      <li>The total number of guesses is 36^6 (36 million), because there are 6 characters, and 36 guesses for each character.</li>
+      <li>Offline brute-forcing (one of the fastest types) can guess at about 10^9 (one billion) guesses per second!</li>
+      <li>We divide 36^6 by 10^9, and we get 2.2 seconds. That's how long it takes to guess a weak password like "abc123"!</li>
+    </ol>
+  </p>
 </body>
 </html>

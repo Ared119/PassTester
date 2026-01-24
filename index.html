@@ -13,7 +13,6 @@
       margin: 0;
     }
 
-    /* ===== Top Menu ===== */
     nav {
       background: #020617;
       border-bottom: 1px solid #1e293b;
@@ -44,7 +43,6 @@
       color: #e5e7eb;
     }
 
-    /* ===== Main Content ===== */
     main {
       padding: 2rem;
       max-width: 700px;
@@ -94,7 +92,10 @@
 
 <main>
   <h1>Password Strength Tester</h1>
-  <small>All checks run locally in your browser. Nothing is sent or stored.</small>
+  <small>
+    All analysis runs locally in your browser.  
+    Passwords are never stored or sent.
+  </small>
 
   <input
     type="password"
@@ -107,11 +108,13 @@
 </main>
 
 <script>
+  /* ===== Dictionary ===== */
   const commonPasswords = [
     "password", "123456", "12345678", "qwerty",
     "letmein", "admin", "welcome", "iloveyou"
   ];
 
+  /* ===== Charset size ===== */
   function charsetSize(pw) {
     let size = 0;
     if (/[a-z]/.test(pw)) size += 26;
@@ -121,6 +124,7 @@
     return size;
   }
 
+  /* ===== Time formatting ===== */
   function crackTime(seconds) {
     if (seconds < 60) return seconds.toFixed(1) + " seconds";
     if (seconds < 3600) return (seconds / 60).toFixed(1) + " minutes";
@@ -129,7 +133,41 @@
     return (seconds / 31536000).toFixed(1) + " years";
   }
 
-  document.getElementById("password").addEventListener("input", e => {
+  /* ===== SHA-1 hashing ===== */
+  async function sha1(message) {
+    const buffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-1", buffer);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, "0"))
+      .join("")
+      .toUpperCase();
+  }
+
+  /* ===== HIBP check ===== */
+  async function checkHIBP(password) {
+    const hash = await sha1(password);
+    const prefix = hash.slice(0, 5);
+    const suffix = hash.slice(5);
+
+    const res = await fetch(
+      `https://api.pwnedpasswords.com/range/${prefix}`
+    );
+
+    const text = await res.text();
+    const lines = text.split("\n");
+
+    for (let line of lines) {
+      const [hashSuffix, count] = line.trim().split(":");
+      if (hashSuffix === suffix) {
+        return parseInt(count, 10);
+      }
+    }
+
+    return 0;
+  }
+
+  /* ===== Main logic ===== */
+  document.getElementById("password").addEventListener("input", async e => {
     const pw = e.target.value;
     const out = document.getElementById("output");
 
@@ -148,7 +186,7 @@
     out.innerHTML = `
       <p>🔢 Length: <strong>${pw.length}</strong></p>
 
-      <p>⚡ Brute-force resistance:
+      <p>⚡ Brute‑force resistance:
         <span class="${seconds > 1e10 ? 'good' : 'bad'}">
           ${crackTime(seconds)}
         </span>
@@ -159,7 +197,25 @@
           ${dictionaryHit ? "Common password" : "No match"}
         </span>
       </p>
+
+      <p>🛑 Breach database:
+        <em>Checking…</em>
+      </p>
     `;
+
+    try {
+      const breachCount = await checkHIBP(pw);
+      const breachHTML = breachCount > 0
+        ? `<span class="bad">Found in ${breachCount.toLocaleString()} breaches</span>`
+        : `<span class="good">Not found in known breaches</span>`;
+
+      out.innerHTML = out.innerHTML.replace(
+        "<em>Checking…</em>",
+        breachHTML
+      );
+    } catch {
+      out.innerHTML += `<p class="bad">Error checking breach database</p>`;
+    }
   });
 </script>
 

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PassTester – Password Strength Tester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      margin: 0;
+    }
+
+    /* ===== Top Menu ===== */
+    nav {
+      background: #020617;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .nav-inner {
+      max-width: 700px;
+      margin: auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links a {
+      color: #94a3b8;
+      text-decoration: none;
+      margin-left: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+    /* ===== Main Content ===== */
+    main {
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      border: none;
+      margin: 1rem 0;
+    }
+
+    .result {
+      background: #020617;
+      padding: 1rem;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+
+    .bad { color: #f87171; }
+    .good { color: #4ade80; }
+
+    small {
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">🔐 PassTester</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <h1>Password Strength Tester</h1>
+  <small>All checks run locally in your browser. Nothing is sent or stored.</small>
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter a password"
+    autocomplete="off"
+  />
+
+  <div class="result" id="output"></div>
+</main>
+
+<script>
+  const commonPasswords = [
+    "password", "123456", "12345678", "qwerty",
+    "letmein", "admin", "welcome", "iloveyou"
+  ];
+
+  function charsetSize(pw) {
+    let size = 0;
+    if (/[a-z]/.test(pw)) size += 26;
+    if (/[A-Z]/.test(pw)) size += 26;
+    if (/[0-9]/.test(pw)) size += 10;
+    if (/[^a-zA-Z0-9]/.test(pw)) size += 33;
+    return size;
+  }
+
+  function crackTime(seconds) {
+    if (seconds < 60) return seconds.toFixed(1) + " seconds";
+    if (seconds < 3600) return (seconds / 60).toFixed(1) + " minutes";
+    if (seconds < 86400) return (seconds / 3600).toFixed(1) + " hours";
+    if (seconds < 31536000) return (seconds / 86400).toFixed(1) + " days";
+    return (seconds / 31536000).toFixed(1) + " years";
+  }
+
+  document.getElementById("password").addEventListener("input", e => {
+    const pw = e.target.value;
+    const out = document.getElementById("output");
+
+    if (!pw) {
+      out.innerHTML = "";
+      return;
+    }
+
+    const size = charsetSize(pw);
+    const combinations = Math.pow(size, pw.length);
+    const guessesPerSecond = 1e9;
+    const seconds = combinations / guessesPerSecond;
+
+    const dictionaryHit = commonPasswords.includes(pw.toLowerCase());
+
+    out.innerHTML = `
+      <p>🔢 Length: <strong>${pw.length}</strong></p>
+
+      <p>⚡ Brute-force resistance:
+        <span class="${seconds > 1e10 ? 'good' : 'bad'}">
+          ${crackTime(seconds)}
+        </span>
+      </p>
+
+      <p>📚 Dictionary attack:
+        <span class="${dictionaryHit ? 'bad' : 'good'}">
+          ${dictionaryHit ? "Common password" : "No match"}
+        </span>
+      </p>
+    `;
+  });
+</script>
+
+</body>
+</html>

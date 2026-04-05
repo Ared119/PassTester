@@ -51,12 +51,9 @@ body {
     background-color: black;
     border-radius: 100px;
     margin-top: 200px;
-    box-shadow: 5px 5px 5px white;
+    box-shadow: 5px 5px 5px 10px black;
   }
 
-  main:hover {
-    box-shadow: 5px 5px 5px red;
-  }
 
   h1 {
     margin-bottom: 0.5rem;

@@ -1,10 +1,4 @@
-  /* ===== Dictionary ===== */
-  const commonPasswords = [
-    "password", "123456", "12345678", "qwerty",
-    "letmein", "admin", "welcome", "iloveyou"
-  ];
-
-  /* ===== Charset size ===== */
+/* ===== Charset size ===== */
   function charsetSize(pw) {
     let size = 0;
     if (/[a-z]/.test(pw)) size += 26;

@@ -65,7 +65,7 @@
     const guessesPerSecond = 1e9;
     const seconds = combinations / guessesPerSecond;
 
-    const dictionaryHit = commonPasswords.includes(pw.toLowerCase());
+    //const dictionaryHit = commonPasswords.includes(pw.toLowerCase());
 
     out.innerHTML = `
       <p>🔢 Length: <strong>${pw.length}</strong></p>
@@ -95,3 +95,5 @@
       out.innerHTML += `<p class="bad">Error checking breach database</p>`;
     }
   });
+
+  //Pattern Detection

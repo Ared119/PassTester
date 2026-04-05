@@ -49,4 +49,55 @@
   untouchable by a brute-force attack. In other words, if your password is secure in the worst-case
   scenario, then it is much more safe in a real-life scenario.</p>
 </body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PassTester – Password Strength Tester</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="https://www.passtester.com/favicon.ico">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">🔐 PassTester</div>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <h1>Password Strength Tester</h1>
+  <small>
+    All analysis runs locally in your browser.  
+    Passwords are never stored or sent.
+  </small>
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter a password"
+    autocomplete="off"
+  />
+
+  <div class="result" id="output"></div>
+</main>
+
+<script src="script.js"></script>
+  <h1>How it Works</h1>
+  <p>PassTester will test your password for multiple common attacks and vulnerabilities.
+  This includes brute-force, data breaches (includes dictionary), and pattern recognition.</p>
+  
+  <p><br>Let's start with brute-force! We assume the worst-case scenario, as if the hacker already
+  knows general information about the types of characters in your password. We use a mathematical 
+  formula that calculates the time it takes to guess your password based on the total password 
+  possibilities and a very fast guessing rate. This allows you to make your password almost
+  untouchable by a brute-force attack. In other words, if your password is secure in the worst-case
+  scenario, then it is much more safe in a real-life scenario.</p>
+</body>
 </html>

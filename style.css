@@ -1,91 +1,92 @@
 body {
-    font-family: system-ui, sans-serif;
-    background: #0f172a;
-    color: #e5e7eb;
-    margin: 0;
-  }
+  font-family: system-ui, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+  margin: 0;
+  background-image: url("circuit.png");
+  background-repeat: repeat;
+}
 
-  nav {
-    position: fixed;
-    background: #020617;
-    border-bottom: 1px solid #1e293b;
-    font-size: 30px;
-    padding: 20px;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
+nav {
+  position: fixed;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+  font-size: 30px;
+  padding: 20px;
+  top: 0;
+  right: 0;
+  left: 0;
+}
 
-  .nav-inner {
-    max-width: 600px;
-    margin: auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 30px;
-  }
+.nav-inner {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30px;
+}
 
-  .logo {
-    font-weight: 700;
-    letter-spacing: 0.3px;
-  }
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
 
-  .nav-links a {
-    color: #94a3b8;
-    text-decoration: none;
-    margin-left: 1.2rem;
-    font-size: 20px;
-  }
+.nav-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  margin-left: 1.2rem;
+  font-size: 20px;
+}
 
-  .nav-links a:hover {
-    color: #e5e7eb;
-  }
+.nav-links a:hover {
+  color: #e5e7eb;
+}
 
-  main {
-    padding: 100px;
-    max-width: 700px;
-    margin: 140px;
-    line-height: 1.6;
-    font-size: 25px;
-    background-color: black;
-    border-radius: 100px;
-    margin-top: 200px;
-    /* box-shadow: 5px 5px 5px 10px gray; */
-  }
+main {
+  padding: 100px;
+  max-width: 700px;
+  margin: 140px;
+  line-height: 1.6;
+  font-size: 25px;
+  background-color: black;
+  border-radius: 100px;
+  margin-top: 200px;
+}
 
 
-  h1 {
-    margin-bottom: 0.5rem;
-    margin-left: 10px;
-  }
+h1 {
+  margin-bottom: 0.5rem;
+  margin-left: 10px;
+}
 
-  input {
-    width: 100%;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    border-radius: 6px;
-    border: none;
-    margin: 1rem 0;
-  }
+input {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  border: none;
+  margin: 1rem 0;
+}
 
-  .result {
-    padding: 1rem;
-    border-radius: 8px;
-    line-height: 1.6;
-  }
+.result {
+  padding: 1rem;
+  border-radius: 8px;
+  line-height: 1.6;
+}
 
-  .bad { color: #f87171; }
-  .good { color: #4ade80; }
+.bad { color: #f87171; }
+.good { color: #4ade80; }
 
-  small {
-    color: #94a3b8;
-  }
-  
-  .info {
-    padding: 100px 100px 100px 100px;
-    margin: 100px;
-    background-color: black;
-    border-radius: 100px;
-    font-size: 25px;
-  }
+small {
+  color: #94a3b8;
+}
+
+.info {
+  padding: 100px 100px 100px 100px;
+  margin: 100px;
+  background-color: black;
+  border-radius: 100px;
+  font-size: 25px;
+}

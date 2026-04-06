@@ -62,7 +62,7 @@
 
     const size = charsetSize(pw);
     const combinations = Math.pow(size, pw.length);
-    const guessesPerSecond = 1e9;
+    const guessesPerSecond = 1e10;
     const seconds = combinations / guessesPerSecond;
 
     //const dictionaryHit = commonPasswords.includes(pw.toLowerCase());
